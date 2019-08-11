@@ -31,21 +31,30 @@ def always_valid(state, action):
 
 def argmax_valid_q(qvals, state, check_valid):
     '''Returns the valid action with the maximum Q value'''
-    qvals = np.copy(qvals)
+    qvals_copy = np.copy(qvals)
     for i in range(len(qvals)):
-        action = np.argmax(qvals)
+        action = np.argmax(qvals_copy)
         if check_valid(state, action):
             return action
         else:
-            qvals[action] = 0
+            qvals_copy[action] = 0
+    # none found return argmax of invalid
+    return np.argmax(qvals)
 
 
 def random_valid(qvals, state, check_valid):
     '''Returns a random valid action for the state'''
-    while True:
-        action = random.randrange(len(qvals))
+    # use random seed and then step through systematically instead of using
+    # infintiy loop which could get stuck
+    action = random.randrange(len(qvals))
+    for i in range(len(qvals)):
         if check_valid(state, action):
             return action
+        else:
+            action += 1
+            if action == len(qvals):
+                action = 0
+    return action
 
 
 # Discrete action-space policies ==============================================
