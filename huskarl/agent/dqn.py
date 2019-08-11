@@ -95,7 +95,7 @@ class DQN(Agent):
 	def act(self, state, instance=0):
 		"""Returns the action to be taken given a state."""
 		qvals = self.model.predict(np.array([state]))[0]
-		return self.policy.act(qvals) if self.training else self.test_policy.act(qvals)
+		return self.policy.act(qvals, state) if self.training else self.test_policy.act(qvals, state)
 
 	def push(self, transition, instance=0):
 		"""Stores the transition in memory."""

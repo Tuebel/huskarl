@@ -76,7 +76,7 @@ class DDPG(Agent):
 	def act(self, state, instance=0):
 		"""Returns the action to be taken given a state."""
 		action = self.actor.predict(np.array([state]))[0]
-		return self.policy.act(action) if self.training else self.test_policy.act(action)
+		return self.policy.act(action, state) if self.training else self.test_policy.act(action, state)
 
 	def push(self, transition, instance=0):
 		"""Stores the transition in memory."""

@@ -72,9 +72,9 @@ class A2C(Agent):
 		"""Returns the action to be taken given a state."""
 		qvals = self.model.predict(np.array([state]))[0][:-1]
 		if self.training:
-			return self.policy[instance].act(qvals) if isinstance(self.policy, list) else self.policy.act(qvals)
+			return self.policy[instance].act(qvals, state) if isinstance(self.policy, list) else self.policy.act(qvals, state)
 		else:
-			return self.test_policy[instance].act(qvals) if isinstance(self.test_policy, list) else self.test_policy.act(qvals)
+			return self.test_policy[instance].act(qvals, state) if isinstance(self.test_policy, list) else self.test_policy.act(qvals, state)
 
 	def push(self, transition, instance=0):
 		"""Stores the transition in memory."""
