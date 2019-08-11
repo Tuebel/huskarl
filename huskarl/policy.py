@@ -97,7 +97,7 @@ class GaussianEpsGreedy(Policy):
     def act(self, qvals, state):
         eps = truncnorm.rvs((0 - self.eps_mean) / self.eps_std,
                             (1 - self.eps_mean) / self.eps_std)
-        if random.random() > self.eps:
+        if random.random() > eps:
             return argmax_valid_q(qvals, state, self.check_valid)
         else:
             return random_valid(qvals, state, self.check_valid)
