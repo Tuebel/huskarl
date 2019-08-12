@@ -38,8 +38,8 @@ def argmax_valid_q(qvals, state, check_valid):
             return action
         else:
             qvals_copy[action] = 0
-    # none found return argmax of invalid
-    return np.argmax(qvals)
+    # none found e.g. for multiple 0 Q values, return random valid
+    return random_valid(qvals, state, check_valid)
 
 
 def random_valid(qvals, state, check_valid):
