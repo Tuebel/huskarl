@@ -47,7 +47,7 @@ def print_rewards(episode_rewards: list, episode_steps: list, done=False):
         If the simulation is finished.'''
     for i in range(len(episode_steps)):
         # or matplotlib.pyplot.plot(episode_steps[i], episode_rewards[i])
-        result = [episode_steps[i], episode_rewards[i]]
+        result = zip(episode_steps[i], episode_rewards[i])
         result = list(result)
         print(f'Instance {i} (step, reward): {result}')
     print(f'Done = {done}')
